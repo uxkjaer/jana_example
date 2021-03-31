@@ -5,7 +5,11 @@
   <App id="idAppControl" >
     <pages>
       <Page title="{i18n>title}">
-        <content></content>
+        <content>
+          <Text text="{local>/userId}" />
+          <Text text="{local>/title}" />
+          <Text text="{local>/body}" />
+        </content>
       </Page>
     </pages>
   </App>

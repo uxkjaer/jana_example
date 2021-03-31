@@ -1,8 +1,9 @@
 sap.ui.define([
   "sap/ui/core/UIComponent",
   "sap/ui/Device",
-  "com/myorg/jana/model/models"
-], function(UIComponent, Device, models) {
+  "com/myorg/jana/model/models",
+  "sap/ui/model/json/JSONModel"
+], function(UIComponent, Device, models, JSONModel) {
   "use strict";
 
   return UIComponent.extend("com.myorg.jana.Component", {
@@ -16,9 +17,21 @@ sap.ui.define([
      * @public
      * @override
      */
-    init: function() {
+    init: async function() {
       // call the base component's init function
       UIComponent.prototype.init.apply(this, arguments);
+
+      var oModel = new JSONModel();
+
+
+      fetch('https://jsonplaceholder.typicode.com/posts/1')
+  .then(response => response.json())
+  .then(data => {
+    oModel.setData(data);
+
+  });
+
+      this.setModel(oModel, "local");
 
       // enable routing
       this.getRouter().initialize();
